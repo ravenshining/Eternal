@@ -1,9 +1,9 @@
 ---Embers script used for End Times in Imperium by Windbreaker. Lua by Wrkncacnter (mostly).
 
-CollectionsUsed = { 22 }
+CollectionsUsed = { 24 }
 
-precipitation_type = "rocks"
-precipitation_count = 512
+precipitation_type = "bob pieces"
+precipitation_count = 640
 precipitation_phase = 1
 precipitation_gravity = .03
 precipitation_wind = .01
@@ -151,15 +151,6 @@ function Triggers.init(restoring)
 	Level._triangles = uniform.build_triangle_list(polygon_list)
 	if #polygon_list == 0 then
 		precipitation_count = 0
-	else
-		local total_precipitation_area = 0
-		for _, t in pairs(Level._triangles) do
-			total_precipitation_area = total_precipitation_area + t.area
-		end
-		precipitation_count = total_precipitation_area * 2
-		if precipitation_count > 700 then
-			precipitation_count = 700
-		end
 	end
 	
 	if restoring then

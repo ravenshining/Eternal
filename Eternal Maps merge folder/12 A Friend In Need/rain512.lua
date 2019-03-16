@@ -211,15 +211,6 @@ function Triggers.init(restoring)
 	Level._triangles = uniform.build_triangle_list(polygon_list)
 	if #polygon_list == 0 then
 		precipitation_count = 0
-	else
-		local total_precipitation_area = 0
-		for _, t in pairs(Level._triangles) do
-			total_precipitation_area = total_precipitation_area + t.area
-		end
-		precipitation_count = total_precipitation_area * 2
-		if precipitation_count > 700 then
-			precipitation_count = 700
-		end
 	end
 	
 	if restoring then
