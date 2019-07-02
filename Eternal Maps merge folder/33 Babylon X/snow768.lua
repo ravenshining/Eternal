@@ -181,17 +181,21 @@ function Triggers.idle()
    local phase_match = Game.ticks % phase
    for i = 1,precipitation_count do
       if i % phase == phase_match then
-	   	local e = pool[i]
-			if e then
-				position(e, e.x - wind, e.y - wind, e.z - gravity, e.polygon)
-	 			if e.z < e.polygon.floor.height then
-	    			local x, y, p = uniform.xy_in_triangle_list(Level._triangles)
-	    			e:position(x, y, p.ceiling.height, p)
-	 			elseif e.z > e.polygon.ceiling.height then
-				   local x, y, p = uniform.xy_in_triangle_list(Level._triangles)
-				   e:position(x, y, p.floor.height, p)
-				end
-			end
+        local e = pool[i]
+        position(e, e.x - wind, e.y - wind, e.z - gravity, e.polygon)
+        if e.z < e.polygon.floor.height then
+          local x, y, p = uniform.xy_in_triangle_list(Level._triangles)
+          e:position(x, y, p.ceiling.height, p)
+        elseif e.z > e.polygon.ceiling.height then
+          local x, y, p = uniform.xy_in_triangle_list(Level._triangles)
+          e:position(x, y, p.floor.height, p)
+        end
+        if e.polygon.media then
+          if e.z < e.polygon.media.height then
+            local x, y, p = uniform.xy_in_triangle_list(Level._triangles)
+            e:position(x, y, p.ceiling.height, p)
+          end
+        end
       end
    end
 end
